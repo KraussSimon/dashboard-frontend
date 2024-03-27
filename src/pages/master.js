@@ -2,7 +2,7 @@ import React from "react";
 import io from "socket.io-client";
 import Select from 'react-select';
 
-const socket = io.connect("10.102.31.114:3001")
+const socket = io.connect("192.168.178.66:3001")
 const optionDashboards = [
     {value: 'Dashboard1', label: 'Dashboard 1'},
     {value: 'Dashboard2', label: 'Dashboard 2'},
