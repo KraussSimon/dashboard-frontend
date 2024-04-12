@@ -1,24 +1,39 @@
 import React from 'react';
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import Home from "./pages";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
 import Master from "./pages/master";
-import Dash1 from "./pages/dash1";
-import Dash2 from "./pages/dash2";
+import Client1 from "./pages/Client1";
+import Client2 from "./pages/Client2";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import MyAppBar from './components/MyAppBar';
 
-function App() {
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    primary: {
+      main: '#fcfc03',
+    },
+  },
+});
+
+export default function App() {
 
   return (
     <div className="App">
+      <ThemeProvider theme={darkTheme}>
+        <CssBaseline />
+        <MyAppBar />
         <Router>
           <Routes>
-              <Route exact path="/" element={<Home />} />
-              <Route path="/master" element={<Master />} />
-              <Route path="/dash1" element={<Dash1 />} />
-              <Route path="/dash2" element={<Dash2 />} />
+            <Route exact path="/" element={<Home />} />
+            <Route path="/Home" element={<Home />} />
+            <Route path="/Master" element={<Master />} />
+            <Route path="/Client1" element={<Client1 />} />
+            <Route path="/Client2" element={<Client2 />} />
           </Routes>
         </Router>
+      </ThemeProvider>
     </div>
   );
 }
-
-export default App;

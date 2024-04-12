@@ -1,12 +1,13 @@
-import React from "react";
- 
-const Home = () => {
-    return (
-        <div>
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from '../App';
+import {BrowserRouter} from "react-router-dom";
 
-            <h1>Welcome to ITA Augsburg Dashboards</h1>
-        </div>
-    );
-};
- 
-export default Home;
+ReactDOM.render(
+  <React.StrictMode>
+    <BrowserRouter>
+    <App />
+    </BrowserRouter>
+  </React.StrictMode>,
+  document.getElementById('root')
+);

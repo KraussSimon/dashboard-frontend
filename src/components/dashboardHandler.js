@@ -4,31 +4,31 @@ import Dashboard2Template from "../templates/Dashboard2";
 import Dashboard3Template from "../templates/Dashboard3";
 import Dashboard4Template from "../templates/Dashboard4";
 
-function DashboardHandler(selectedDashboard) {
-    switch (selectedDashboard) {
+export default function DashboardHandler(selectedDashboard) {
+    switch (selectedDashboard.selectedDashboard) {
         case 'Dashboard1':
             return (
                 <Dashboard1Template />
-            );
+            )
 
         case 'Dashboard2':
             return (
                 <Dashboard2Template />
-            );
+            )
 
         case 'Dashboard3':
             return (
                 <Dashboard3Template />
-            );
+            )
 
         case 'Dashboard4':
             return (
                 <Dashboard4Template />
-            );
-    
+            )
+
         default:
-            return 'This is the default'
+            return (
+                <Dashboard1Template/>
+            );
     };
 };
-
-export default DashboardHandler;

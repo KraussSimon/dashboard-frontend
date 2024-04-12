@@ -1,49 +1,74 @@
 import React from "react";
 import io from "socket.io-client";
-import Select from 'react-select';
+import Select from '@mui/material/Select'
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Grid from '@mui/material/Grid';
 
-const socket = io.connect("192.168.178.66:3001")
-const optionDashboards = [
-    {value: 'Dashboard1', label: 'Dashboard 1'},
-    {value: 'Dashboard2', label: 'Dashboard 2'},
-    {value: 'Dashboard3', label: 'Dashboard 3'},
-    {value: 'Dashboard4', label: 'Dashboard 4'}
-];
- 
-//neue Subscriber direkt updaten? 
+const socket = io.connect("localhost:3001")
 
-function Master() {
+//neue Subscriber direkt updaten? => vmtl. im Backend umzusetzen (Wert speichern - on Connect Wert übermitteln)
+
+export default function Master() {
 
     function setDashboard1(value) {
-        socket.emit("dash1_change", {message:value});
-        console.log(value);
+        socket.emit("dash1_change", { value });
     }
 
     function setDashboard2(value) {
-        socket.emit("dash2_change", {message:value});
-        console.log(value);
+        socket.emit("dash2_change", { value });
     }
 
     return (
-        <div>
-            <h1>This is the Master page</h1>
-            <label>
-            Dashboard 1: <Select 
-            options={optionDashboards}
-            placeholder='Select Dashboard'
-            onChange={(event) => setDashboard1(event.value)}
-            />
-            </label>
-            <hr />
-            <label>
-            Dashboard 2: <Select 
-            options={optionDashboards}
-            placeholder='Select Dashboard'
-            onChange={(event) => setDashboard2(event.value)}
-            />
-            </label>
-        </div>
+        <Box>
+            <Grid container>
+                <Grid item xs={12} padding={5}>
+                    <Typography variant="h2" align="center">Master page</Typography>
+                </Grid>
+
+                <Grid item xs={5} padding={10}>
+                    <Typography variant="h5">Select Dashboard to be displayed on Client 1:</Typography>
+                </Grid>
+                <Grid item xs={6} padding={10}>
+                    <InputLabel id="client1-dashboard-label">Client 1</InputLabel>
+                    <FormControl fullWidth>
+                        <Select
+                            labelId="client1-dashboard-label"
+                            id="client1-dashboard"
+                            label="Client1"
+                            onChange={(event) => {setDashboard1(event.target.value)}}
+                        >
+                            <MenuItem value={'Dashboard1'}>Dashboard 1</MenuItem>
+                            <MenuItem value={'Dashboard2'}>Dashboard 2</MenuItem>
+                            <MenuItem value={'Dashboard3'}>Dashboard 3</MenuItem>
+                            <MenuItem value={'Dashboard4'}>Dashboard 4</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Grid>
+
+                <Grid item xs={5} padding={10}>
+                    <Typography variant="h5">Select Dashboard to be displayed on Client 2:</Typography>
+                </Grid>
+                <Grid item xs={6} padding={10}>
+                    <InputLabel id="client2-dashboard-label">Client 2</InputLabel>
+                    <FormControl fullWidth>
+                        <Select
+                            labelId="client2-dashboard-label"
+                            id="client2-dashboard"
+                            label="Client2"
+                            onChange={(event) => {setDashboard2(event.target.value)}}
+                        >
+                            <MenuItem value={'Dashboard1'}>Dashboard 1</MenuItem>
+                            <MenuItem value={'Dashboard2'}>Dashboard 2</MenuItem>
+                            <MenuItem value={'Dashboard3'}>Dashboard 3</MenuItem>
+                            <MenuItem value={'Dashboard4'}>Dashboard 4</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Grid>
+            </Grid>
+        </Box>
     );
 };
- 
-export default Master;
