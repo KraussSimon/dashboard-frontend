@@ -7,6 +7,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Grid from '@mui/material/Grid';
+import MyAppBar from "../components/MyAppBar";
 
 const socket = io.connect("localhost:3001")
 
@@ -23,12 +24,10 @@ export default function Master() {
     }
 
     return (
+        <>
+        <MyAppBar pageName={"Master Page"}/>
         <Box>
             <Grid container>
-                <Grid item xs={12} padding={5}>
-                    <Typography variant="h2" align="center">Master page</Typography>
-                </Grid>
-
                 <Grid item xs={5} padding={10}>
                     <Typography variant="h5">Select Dashboard to be displayed on Client 1:</Typography>
                 </Grid>
@@ -70,5 +69,6 @@ export default function Master() {
                 </Grid>
             </Grid>
         </Box>
+        </>
     );
 };

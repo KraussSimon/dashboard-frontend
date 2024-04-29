@@ -7,32 +7,37 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import HomeIcon from '@mui/icons-material/Home';
+import EngineeringIcon from '@mui/icons-material/Engineering';
+import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
 import MenuIcon from '@mui/icons-material/Menu';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export default function MyAppBar() {
-const [open, setOpen] = React.useState(false);
+export default function MyAppBar(props) {
+    const [open, setOpen] = React.useState(false);
+    const navigate = useNavigate();
 
-    const toggleDrawer = (newOpen) => () => {
-        setOpen(newOpen);
+    const toggleDrawer = () => {
+        setOpen(!open);
     };
 
     const DrawerList = (
-        <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
+        <Box sx={{ width: '250px' }} role="presentation" onClick={toggleDrawer}>
 
             <List>
-                {['Home', 'Master', 'Client1', 'Client2'].map((text, index) => (
-                    <ListItem key={text} component={Link} to={`/${text}`} disablePadding>
-                        <ListItemButton>
+                {[{linkText: 'Home', displayText: "Home", icon: <HomeIcon fontSize="large"/>}, 
+                  {linkText: 'Master', displayText: "Master", icon: <EngineeringIcon fontSize="large"/>},
+                  {linkText: 'Client1', displayText: "Client 1", icon: <SpaceDashboardIcon fontSize="large"/>},
+                  {linkText: 'Client2', displayText: "Client 2", icon: <SpaceDashboardIcon fontSize="large"/>}].map((linkObject) => (
+                    <ListItem key={linkObject.linkText} disablePadding>
+                        <ListItemButton onClick={() => navigate(`/${linkObject.linkText}`)}>
                             <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                               {linkObject.icon}
                             </ListItemIcon>
-                            <ListItemText primary={text} />
+                            <ListItemText primary={linkObject.displayText} primaryTypographyProps={{variant: "h6"}}/>
                         </ListItemButton>
                     </ListItem>
                 ))}
@@ -50,17 +55,17 @@ const [open, setOpen] = React.useState(false);
                         color="inherit"
                         aria-label="menu"
                         sx={{ mr: 2 }}
-                        onClick={toggleDrawer(true)}
+                        onClick={toggleDrawer}
                     >
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-                        Home
+                        {props.pageName}
                     </Typography>
                     {/* <Button color="inherit">Login</Button> */}
                 </Toolbar>
             </AppBar>
-            <Drawer open={open} onClose={toggleDrawer(false)}>
+            <Drawer open={open} onClose={toggleDrawer}>
                 {DrawerList}
             </Drawer>
         </Box>

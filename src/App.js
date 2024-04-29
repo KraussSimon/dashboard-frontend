@@ -6,7 +6,6 @@ import Client1 from "./pages/Client1";
 import Client2 from "./pages/Client2";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import MyAppBar from './components/MyAppBar';
 
 const darkTheme = createTheme({
   palette: {
@@ -23,7 +22,6 @@ export default function App() {
     <div className="App">
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
-        <MyAppBar />
         <Router>
           <Routes>
             <Route exact path="/" element={<Home />} />
