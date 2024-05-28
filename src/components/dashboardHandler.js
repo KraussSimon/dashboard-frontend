@@ -5,6 +5,7 @@ import Dashboard3Template from "../templates/Dashboard3";
 import Dashboard4Template from "../templates/Dashboard4";
 
 export default function DashboardHandler(selectedDashboard) {
+    console.log(selectedDashboard);
     switch (selectedDashboard.selectedDashboard) {
         case 'Dashboard1':
             return (

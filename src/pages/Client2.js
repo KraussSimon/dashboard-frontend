@@ -4,8 +4,12 @@ import DashboardHandler from "../components/dashboardHandler";
 import Box from '@mui/material/Box';
 import Grid from "@mui/material/Grid";
 import MyAppBar from "../components/MyAppBar";
+import Config from "../components/config.json"
 
-const socket = io.connect("localhost:3001")
+const websocketURL = `${Config.SERVER_URL}:${Config.PORT}`
+const socket = io.connect(websocketURL);
+// const socket = io.connect("10.102.31.5:3001")
+// const socket = io.connect("localhost:3001")
 
 export default function Client2() {
 
